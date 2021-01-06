@@ -6,8 +6,8 @@ pipeline {
 	    stages {
 	        stage ('Git Checkout') {
 	            steps {
-	                git branch: 'main'
-			credentialsID: '26d7f9d5-5345-44c9-aa0d-8bc3fbb0aff7'
+	                git branch: 'main',
+			credentialsID: '26d7f9d5-5345-44c9-aa0d-8bc3fbb0aff7',
 			url: 'https://github.com/thesatyammishra/ctcode.git'
 	                }
 	            } 
