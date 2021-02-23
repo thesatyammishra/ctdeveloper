@@ -6,7 +6,10 @@ pipeline {
 	    stages {
 	        stage ('Git Checkout') {
 	            steps {
-	                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '6cd486ea-6893-4acf-a418-d5dceef2be8f', url: 'https://github.com/thesatyammishra/ctdeveloper.git']]])
+	                git branch: 'main',
+			credentialsId: '6cd486ea-6893-4acf-a418-d5dceef2be8f',
+			url: 'https://github.com/thesatyammishra/ctcode.git'
+	                
 	                }
 	            } 
 		stage ('Compile') {
@@ -24,7 +27,6 @@ pipeline {
 	                sh 'mvn install'
 	                }
 	            }
-
 		 stage ('Test') {
 	            steps {
 			sh 'cd /root/.jenkins/workspace/new1/ && touch test-results-unit.xml'    
