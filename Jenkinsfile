@@ -30,12 +30,22 @@ pipeline {
 		 stage ('Test') {
 	            steps {    
 	                sh 'mvn clean test'
-	                }
+			script {
+                    	def testResults = findFiles(glob: 'build/reports/**/*.xml')
+                    	for(xml in testResults) {
+                        touch xml.getPath()
+                    }
+                }
+		    }
+		 }
+	    
+	                
 			 post {
-			 always {
-				   junit '**/test-results-unit.xml'	
-			 }
-	            }   
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
+        }
+    }
 		 }
 		    
 		 stage ('Create war file') {
