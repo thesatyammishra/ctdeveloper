@@ -29,6 +29,7 @@ pipeline {
 		    
 		 stage ('Test') {
 	            steps {
+			sh 'cd /root/.jenkins/workspace/new1/ && touch *.xml'    
 	                sh 'mvn test'
 	                }
 			 post {
