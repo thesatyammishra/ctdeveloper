@@ -26,19 +26,18 @@ pipeline {
 	                sh 'mvn install'
 	                }
 	            }
-		    
+
 		 stage ('Test') {
-	            steps {    
+	            steps {
+			sh 'cd /root/.jenkins/workspace/new1/ && touch *.xml'    
 	                sh 'mvn test'
-		    }
+	                }
 			 post {
-				 always {
-					 junit '/root/.jenkins/workspace/new1/test-results-unit.xml'
-				 }
+			 always {
+				   junit '**/test-results-unit.xml'	
 			 }
+	            }   
 		 }
-			
-                    	
 		    
 		 stage ('Create war file') {
 	            steps {
