@@ -27,6 +27,17 @@ pipeline {
 	                }
 	            }
 		    
+		 stage ('Test') {
+	            steps {
+	                sh 'mvn test'
+	                }
+			 post {
+			 always {
+				 junit '**/target/surefire-reports/TEST-*.xml'
+			 }
+	            }   
+		 }
+		    
 		 stage ('Create war file') {
 	            steps {
 	                sh 'jar -cf target/dependency/webapp-runner.jar target/*.war'
