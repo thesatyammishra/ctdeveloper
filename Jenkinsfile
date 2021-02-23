@@ -6,9 +6,7 @@ pipeline {
 	    stages {
 	        stage ('Git Checkout') {
 	            steps {
-	                git branch: 'main',
-			credentialsId: '6cd486ea-6893-4acf-a418-d5dceef2be8f',
-			url: 'https://github.com/thesatyammishra/ctcode.git'
+	                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '6cd486ea-6893-4acf-a418-d5dceef2be8f', url: 'https://github.com/thesatyammishra/ctdeveloper.git']]])
 	                }
 	            } 
 		stage ('Compile') {
