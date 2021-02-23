@@ -29,24 +29,16 @@ pipeline {
 		    
 		 stage ('Test') {
 	            steps {    
-	                sh 'mvn clean test'
-			script {
-                    	def testResults = findFiles(glob: 'build/reports/**/*.xml')
-                    	for(xml in testResults) {
-                        touch xml.getPath()
-                    }
-                }
+	                sh 'mvn test'
 		    }
-		 
-	    
-	                
 			 post {
-        always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
-        }
-    }
+				 always {
+					 junit '/root/.jenkins/workspace/new1/test-results-unit.xml'
+				 }
+			 }
 		 }
+			
+                    	
 		    
 		 stage ('Create war file') {
 	            steps {
